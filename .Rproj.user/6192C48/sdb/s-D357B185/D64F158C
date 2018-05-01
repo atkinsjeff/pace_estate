@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "# Data munging script\n\n# this will need to be converted to a function at some point.\nrequire(plyr)\nrequire(dplyr)\nrequire(tidyverse)\n\nx <- read.csv(\"./data/0426_pace_estate_ndvi_camera_analysis.CSV\",\n               skip = 5)\n\ndf <- x[,c(2,34, 60:61, 62:67, 75)]\n\nnames(df)[1] <- \"filename\"\nnames(df)[2] <- \"ndvi\"\nnames(df)[3] <- \"gap_fraction\"\nnames(df)[4] <- \"openness\"\nnames(df)[5] <- \"lai1\"\nnames(df)[6] <- \"lai2\"\nnames(df)[7] <- \"lai3\"\nnames(df)[8] <- \"lai4\"\nnames(df)[9] <- \"lai5\"\nnames(df)[10] <- \"leaf_angle\"\nnames(df)[11] <- \"ci\"\n\ndf$date <- as.Date(\"2018-04-26\")\n\ndf$plot <- as.factor(substr(df$filename, 5, 9))\ndf$scan <- as.factor(substr(df$filename, 5, 10))\ndf$lai <- rowMeans(df[,5:9])\n\ndf %>% group_by(plot) %>%\n  summarize(lai= mean(lai),\n            ndvi = mean(ndvi),\n            gap_fraction = mean(gap_fraction),\n            theta = mean(leaf_angle),\n            ci = mean(ci)) -> pace\n\npace <- data.frame(pace)\n  \n",
+    "created" : 1525190647255.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "691128393",
+    "id" : "D64F158C",
+    "lastKnownWriteTime" : 1525194748,
+    "last_content_update" : 1525194748615,
+    "path" : "C:/github/pace_estate/01_data_cleaning_script_for_winscanopy_output.R",
+    "project_path" : "01_data_cleaning_script_for_winscanopy_output.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
