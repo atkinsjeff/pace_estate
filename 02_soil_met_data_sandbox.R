@@ -14,6 +14,16 @@ soil.met %>%
   
 # comparison
 y <- merge(pace, vwc)
+y <- merge(y, fpar)
 
 ggplot(y, aes(x = gap_fraction, y = vwc.sd))+
   geom_point()
+
+ggplot(y, aes(x = gap_fraction, y = fpar))+
+  geom_point(size = 2)
+
+ggplot(y, aes(x = lai, y = lai.lp80))+
+  geom_point(size = 3)+
+  geom_text(aes(label=y$plot),hjust=0, vjust=0)+
+  xlab("CAMERA LAI")+
+  ylab("LP-80 LAI")
