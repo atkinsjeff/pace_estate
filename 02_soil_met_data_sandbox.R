@@ -27,3 +27,5 @@ ggplot(y, aes(x = lai, y = lai.lp80))+
   geom_text(aes(label=y$plot),hjust=0, vjust=0)+
   xlab("CAMERA LAI")+
   ylab("LP-80 LAI")
+  
+
